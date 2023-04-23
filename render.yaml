@@ -1,0 +1,8 @@
+services:
+  - name: web
+    buildCommand: "pip install -r requirements.txt && python app.py"
+    env:
+      PYTHONUNBUFFERED: "true"
+    command: "gunicorn app:app --log-file - --workers 4 --threads 4 --worker-class gthread --worker-tmp-dir /dev/shm"
+    automaticDeploy:
+      branch: main
